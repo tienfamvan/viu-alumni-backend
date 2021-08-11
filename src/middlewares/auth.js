@@ -40,7 +40,7 @@ const auth = async (req, res, next) => {
 
 // Check is the username is taken
 const checkUseIdTaken = async (req, res, next) => {
-  User.findOne({ useId: req.body.useId }, (error, userWithSameUserId) => {
+  User.findOne({ userId: req.body.userId }, (error, userWithSameUserId) => {
     if (error) {
       return res.status(serverError).json({ message: error });
     } else if (userWithSameUserId) {

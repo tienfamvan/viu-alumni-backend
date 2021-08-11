@@ -13,7 +13,7 @@ const validateSignUp = [
     .withMessage("Tên phải ít nhất 2 ký tự trở lên")
     .trim()
     .escape(),
-  body("useId")
+  body("userId")
     .isLength({ min: 2, max: 7 })
     .withMessage("Mã sinh viên phải ít nhất 2 ký tự trở lên")
     .trim()
