@@ -69,7 +69,7 @@ export default class UserController {
         return res.status(notFound).json(res, notFound, dataNotFound);
       }
 
-      return res.status(success).json(data);
+      return res.status(success).json({ data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }

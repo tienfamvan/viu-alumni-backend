@@ -17,7 +17,7 @@ export default class BannerController {
     try {
       const data = await Banner.find();
 
-      return res.status(success).json(data);
+      return res.status(success).json({ data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }

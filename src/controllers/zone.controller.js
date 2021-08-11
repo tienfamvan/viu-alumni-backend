@@ -16,7 +16,7 @@ export default class ZoneController {
     try {
       const data = await Zone.find();
 
-      return res.status(success).json(data);
+      return res.status(success).json({ data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
