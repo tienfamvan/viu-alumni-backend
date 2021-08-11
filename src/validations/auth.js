@@ -18,11 +18,6 @@ const validateSignUp = [
     .withMessage("Mã sinh viên phải ít nhất 2 ký tự trở lên")
     .trim()
     .escape(),
-  body("email")
-    .isEmail()
-    .withMessage("Email không được bỏ trống")
-    .trim()
-    .escape(),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Mật khẩu phải ít nhất 8 ký tự trở lên")

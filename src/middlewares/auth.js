@@ -51,19 +51,6 @@ const checkUseIdTaken = async (req, res, next) => {
   });
 };
 
-// Check if the email address is already taken
-const checkEmailTaken = async (req, res, next) => {
-  User.findOne({ email: req.body.email }, (error, userWithSameEmail) => {
-    if (error) {
-      return res.status(serverError).json({ message: error });
-    } else if (userWithSameEmail) {
-      return res.status(badRequest).json({ message: emailTaken });
-    } else {
-      next();
-    }
-  });
-};
-
 // Check login
 const checkLogin = async (req, res, next) => {
   const { useId, password } = req.body;
@@ -101,6 +88,5 @@ export default {
   auth,
   isAdmin,
   checkUseIdTaken,
-  checkEmailTaken,
   checkLogin,
 };

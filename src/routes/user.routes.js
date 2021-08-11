@@ -6,8 +6,7 @@ import toBase64 from "../middlewares/uploadFileBase64.js";
 
 const { fileField, convertBase64 } = toBase64;
 const { validateSignUp, validateLogin, validateZone } = validateForm;
-const { auth, isAdmin, checkUseIdTaken, checkEmailTaken, checkLogin } =
-  authMiddleware;
+const { auth, isAdmin, checkUseIdTaken, checkLogin } = authMiddleware;
 const { createUser, updateUser, deleteUser, getUsers, loginUser } =
   userController;
 
@@ -17,7 +16,6 @@ userRoute.post(
   "/signup",
   validateSignUp,
   checkUseIdTaken,
-  checkEmailTaken,
   fileField("image"),
   convertBase64,
   createUser
