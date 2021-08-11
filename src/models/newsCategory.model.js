@@ -9,6 +9,7 @@ const newsCategorySchema = mongoose.Schema(
     },
     title: {
       type: String,
+      required: true,
       default: "",
     },
   },

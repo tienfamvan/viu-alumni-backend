@@ -4,7 +4,7 @@ const countrySchema = mongoose.Schema(
   {
     name: {
       type: String,
-      default: "",
+      required: true,
     },
     status: {
       type: Number,

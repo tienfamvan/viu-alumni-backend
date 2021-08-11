@@ -2,13 +2,19 @@ import mongoose from "mongoose";
 
 const recruitSchema = mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      refs: "User",
+      required: true,
+      default: null,
+    },
     jobName: {
       type: String,
-      default: "",
+      required: true,
     },
     companyName: {
       type: String,
-      default: "",
+      required: true,
     },
     image: {
       type: String,
@@ -24,14 +30,15 @@ const recruitSchema = mongoose.Schema(
     },
     salaryMin: {
       type: Number,
-      default: 0,
+      required: true,
     },
     salaryMax: {
       type: Number,
-      default: 0,
+      required: true,
     },
     dateBegin: {
       type: Date,
+      required: true,
       default: Date.now(),
     },
     dateEnd: {
@@ -45,6 +52,11 @@ const recruitSchema = mongoose.Schema(
     description: {
       type: String,
       default: "",
+    },
+    zoneId: {
+      type: mongoose.Schema.Types.ObjectId,
+      refs: "Zone",
+      required: true,
     },
   },
   {

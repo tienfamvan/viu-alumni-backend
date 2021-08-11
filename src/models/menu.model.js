@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 const menuSchema = mongoose.Schema(
   {
     parentId: {
-      type: Number,
+      type: mongoose.Schema.Types.ObjectId,
+      refs: "Menu",
       default: null,
     },
     title: {
       type: String,
+      required: true,
       default: "",
     },
     url: {
