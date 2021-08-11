@@ -53,9 +53,9 @@ const checkUseIdTaken = async (req, res, next) => {
 
 // Check login
 const checkLogin = async (req, res, next) => {
-  const { useId, password } = req.body;
+  const { userId, password } = req.body;
 
-  const userData = await User.findOne({ useId: useId });
+  const userData = await User.findOne({ userId: userId });
 
   if (!userData) {
     return res.status(notFound).json({ message: UsernameOrPasswordIncorrect });
