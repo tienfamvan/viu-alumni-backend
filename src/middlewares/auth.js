@@ -17,7 +17,7 @@ const { isPasswordValid } = misc;
 const auth = async (req, res, next) => {
   // const token = req.header("x-auth-token");
   if (!req.headers["authorization"]) {
-    return res.status(forbidden).json({ message: "Chưa xác thực" });
+    return res.status(forbidden).json({ message: invalidRequest });
   }
   const token = req.headers["authorization"].split(" ")[1];
 

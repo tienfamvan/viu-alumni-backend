@@ -15,8 +15,7 @@ const {
   updatedSuccessfully,
   deletedSuccessfully,
   loginSuccessfully,
-  dataList,
-  dataNotFound,
+  notFoundUser,
 } = messages;
 
 export default class UserController {
@@ -29,7 +28,7 @@ export default class UserController {
 
       return res
         .status(created)
-        .json({ message: "Tạo người dùng thành công", data: newUser });
+        .json({ message: "Đăng ký người dùng thành công", data: newUser });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -66,7 +65,7 @@ export default class UserController {
       );
 
       if (!data) {
-        return res.status(notFound).json(res, notFound, dataNotFound);
+        return res.status(notFound).json({ message: notFoundUser });
       }
 
       return res.status(success).json({ data });

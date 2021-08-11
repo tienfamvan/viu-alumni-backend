@@ -11,6 +11,8 @@ const messages = {
   userIdTaken: "Mã sinh viên đã tồn tại",
   emailTaken: "Email đã tồn tại",
 
+  notFoundUser: "Không tìm thấy người dùng",
+  notFound: "Không tìm thấy",
   permissionIsDenied: "Không có quyền truy cập",
 };
 

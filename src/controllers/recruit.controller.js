@@ -7,8 +7,7 @@ const {
   updatedSuccessfully,
   deletedSuccessfully,
   loginSuccessfully,
-  dataList,
-  dataNotFound,
+  notFoundUser,
 } = messages;
 const { success, created, serverError, notFound } = statusCodes;
 export default class RecruitController {
