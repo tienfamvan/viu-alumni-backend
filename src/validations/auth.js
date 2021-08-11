@@ -14,10 +14,10 @@ const validateSignUp = [
     .trim()
     .escape(),
   body("userId")
-    .isLength({ min: 2, max: 7 })
-    .withMessage("Mã sinh viên phải ít nhất 2 ký tự trở lên")
-    .trim()
-    .escape(),
+    .notEmpty()
+    .withMessage("Mã sinh viên không được bỏ trống")
+    .isInt({ gt: 0 })
+    .withMessage("Mã sinh viên không thể thuộc giá trị âm"),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Mật khẩu phải ít nhất 8 ký tự trở lên")
@@ -38,10 +38,10 @@ const validateSignUp = [
 
 const validateLogin = [
   body("userId")
-    .isLength({ min: 1 })
+    .notEmpty()
     .withMessage("Mã sinh viên không được bỏ trống")
-    .trim()
-    .escape(),
+    .isInt({ gt: 0 })
+    .withMessage("Mã sinh viên không thể thuộc giá trị âm"),
   body("password")
     .isLength({ min: 1 })
     .withMessage("Mật khẩu không được bỏ trống")

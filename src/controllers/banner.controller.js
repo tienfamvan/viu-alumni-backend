@@ -26,11 +26,9 @@ export default class BannerController {
   static createBanner = async (req, res) => {
     try {
       const newBanner = req.body;
-      await Banner.create(newBanner);
+      const data = await Banner.create(newBanner);
 
-      return res
-        .status(created)
-        .json({ message: createdSuccessfully, data: newBanner });
+      return res.status(created).json({ message: createdSuccessfully, data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }

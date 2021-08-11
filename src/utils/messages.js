@@ -2,7 +2,7 @@ const messages = {
   createdSuccessfully: "Tạo thành công",
   updatedSuccessfully: "Cập nhập thành công",
   deletedSuccessfully: "Xóa thành côngy",
-  loggedInSuccessfully: "Đăng nhập thành công",
+  loginSuccessfully: "Đăng nhập thành công",
   invalidRequest: "Truy vấn thiếu, không xác thực được",
   invalidToken: "Thiếu thông tin xác thực, hãy đăng nhập và thử lại",
   invalidUserId: "Mã sinh viên không tồn tại",

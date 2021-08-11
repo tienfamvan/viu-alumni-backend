@@ -14,7 +14,7 @@ const {
   createdSuccessfully,
   updatedSuccessfully,
   deletedSuccessfully,
-  loginSuccessful,
+  loginSuccessfully,
   dataList,
   dataNotFound,
 } = messages;
@@ -85,7 +85,7 @@ export default class UserController {
       const token = await generateToken(tokenData);
       return res
         .status(created)
-        .json({ message: loginSuccessful, data: userData, token });
+        .json({ message: loginSuccessfully, data: userData, token });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
