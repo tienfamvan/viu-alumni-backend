@@ -12,6 +12,8 @@ const { createUser, updateUser, deleteUser, getUsers, loginUser } =
 
 const userRoute = express.Router();
 
+import test from "../test.js";
+
 userRoute.post(
   "/signup",
   validateSignUp,

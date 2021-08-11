@@ -31,7 +31,7 @@ export default class UserController {
         .status(created)
         .json({ message: "Tạo người dùng thành công", data: newUser });
     } catch (error) {
-      return res.status(serverError).json({ message: "Error!" });
+      return res.status(serverError).json({ message: error || "Error!" });
     }
   };
 

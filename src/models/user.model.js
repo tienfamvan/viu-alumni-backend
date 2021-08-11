@@ -21,7 +21,6 @@ const userSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      required: false,
       default: "https://i.imgur.com/WxNkK7J.png",
     },
     dateBirth: {
