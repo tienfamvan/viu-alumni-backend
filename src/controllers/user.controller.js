@@ -62,7 +62,7 @@ export default class UserController {
     }
   };
 
-  static getUsers = async (req, res) => {
+  static getUser = async (req, res) => {
     try {
       const data = await User.findOne({ _id: req.user._id }).select(
         "-password"
