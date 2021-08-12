@@ -8,6 +8,7 @@ const {
   deletedSuccessfully,
   loginSuccessfully,
   notFoundUser,
+  dataNotFound,
 } = messages;
 const { success, created, serverError, notFound } = statusCodes;
 export default class RecruitController {
@@ -24,11 +25,9 @@ export default class RecruitController {
   static createRecruit = async (req, res) => {
     try {
       const newRecruit = req.body;
-      await Recruit.create(newRecruit);
+      const data = await Recruit.create(newRecruit);
 
-      return res
-        .status(created)
-        .json({ message: createdSuccessfully, data: newRecruit });
+      return res.status(created).json({ message: createdSuccessfully, data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -38,9 +37,10 @@ export default class RecruitController {
     const condition = { _id: req.params.recruitId };
     try {
       const data = await Recruit.findOneAndUpdate(condition, req.body);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: updatedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 
@@ -48,9 +48,10 @@ export default class RecruitController {
     const condition = { _id: req.params.recruitId };
     try {
       const data = await Recruit.findOneAndDelete(condition);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: deletedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 }

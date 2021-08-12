@@ -18,8 +18,8 @@ bannerRoutes.post(
   auth,
   isAdmin,
   fileField("image"),
-  convertBase64,
   validateNewsCategory,
+  convertBase64,
   createBanner
 );
 bannerRoutes.put(
@@ -27,8 +27,8 @@ bannerRoutes.put(
   auth,
   isAdmin,
   fileField("image"),
-  convertBase64,
   validateNewsCategory,
+  convertBase64,
   updateBanner
 );
 bannerRoutes.delete("/:bannerId", auth, isAdmin, deleteBanner);

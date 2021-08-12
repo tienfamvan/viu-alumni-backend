@@ -12,7 +12,7 @@ const messages = {
   emailTaken: "Email đã tồn tại",
 
   notFoundUser: "Không tìm thấy người dùng",
-  notFound: "Không tìm thấy",
+  dataNotFound: "Không tìm thấy",
   permissionIsDenied: "Không có quyền truy cập",
 };
 

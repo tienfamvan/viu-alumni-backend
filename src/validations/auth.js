@@ -17,7 +17,9 @@ const validateSignUp = [
     .notEmpty()
     .withMessage("Mã sinh viên không được bỏ trống")
     .isInt({ gt: 0 })
-    .withMessage("Mã sinh viên không thể thuộc giá trị âm"),
+    .withMessage("Mã sinh viên không thể thuộc giá trị âm")
+    .isInt({ gt: 9 })
+    .withMessage("Mã sinh viên phải từ 2 ký tự trở lên"),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Mật khẩu phải ít nhất 8 ký tự trở lên")
@@ -63,7 +65,7 @@ const validateLogin = [
 const validateZone = [
   body("name")
     .isLength({ min: 1 })
-    .withMessage("Tên vùng miền không được bỏ trống")
+    .withMessage("Tên không được bỏ trống")
     .trim()
     .escape(),
   (req, res, next) => {

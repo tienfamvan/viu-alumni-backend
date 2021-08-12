@@ -8,6 +8,7 @@ const {
   deletedSuccessfully,
   loginSuccessfully,
   notFoundUser,
+  dataNotFound,
 } = messages;
 const { success, created, serverError, notFound } = statusCodes;
 export default class NewsController {
@@ -24,11 +25,9 @@ export default class NewsController {
   static createNews = async (req, res) => {
     try {
       const newNews = { ...req.body, userId: req.user._id };
-      await News.create(newNews);
+      const data = await News.create(newNews);
 
-      return res
-        .status(created)
-        .json({ message: createdSuccessfully, data: newNews });
+      return res.status(created).json({ message: createdSuccessfully, data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -38,9 +37,10 @@ export default class NewsController {
     const condition = { _id: req.params.newsId };
     try {
       const data = await News.findOneAndUpdate(condition, req.body);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: updatedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 
@@ -48,9 +48,10 @@ export default class NewsController {
     const condition = { _id: req.params.newsId };
     try {
       const data = await News.findOneAndDelete(condition);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: deletedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 }

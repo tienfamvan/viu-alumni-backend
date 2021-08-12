@@ -8,6 +8,7 @@ const {
   deletedSuccessfully,
   loginSuccessfully,
   notFoundUser,
+  dataNotFound,
 } = messages;
 const { success, created, serverError, notFound } = statusCodes;
 export default class ZoneController {
@@ -25,13 +26,11 @@ export default class ZoneController {
     try {
       const newZone = req.body;
 
-      await Zone.create(newZone);
+      const data = await Zone.create(newZone);
 
-      return res
-        .status(created)
-        .json({ message: createdSuccessfully, data: newZone });
+      return res.status(created).json({ message: createdSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 
@@ -39,9 +38,10 @@ export default class ZoneController {
     const condition = { _id: req.params.zoneId };
     try {
       const data = await Zone.findOneAndUpdate(condition, req.body);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: updatedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 
@@ -49,9 +49,10 @@ export default class ZoneController {
     const condition = { _id: req.params.zoneId };
     try {
       const data = await Zone.findOneAndDelete(condition);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: deletedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 }

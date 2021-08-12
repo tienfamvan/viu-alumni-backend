@@ -7,6 +7,7 @@ import zoneRoutes from "./zone.routes.js";
 import newsCategoryRoutes from "./newsCategory.routes.js";
 import newsRoutes from "./news.routes.js";
 import recruitRoutes from "./recruit.routes.js";
+import trainIndustryRoutes from "./trainIndustry.routes.js";
 
 const routes = express.Router();
 
@@ -18,5 +19,6 @@ routes.use("/api/zone", zoneRoutes);
 routes.use("/api/news-category", newsCategoryRoutes);
 routes.use("/api/news", newsRoutes);
 routes.use("/api/recruit", recruitRoutes);
+routes.use("/api/train-industry", trainIndustryRoutes);
 
 export default routes;

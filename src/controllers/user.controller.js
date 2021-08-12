@@ -16,6 +16,7 @@ const {
   deletedSuccessfully,
   loginSuccessfully,
   notFoundUser,
+  dataNotFound,
 } = messages;
 
 export default class UserController {
@@ -38,11 +39,13 @@ export default class UserController {
     try {
       const condition = { _id: req.params.id };
       const user = req.body;
-      const newUser = await User.findOneAndUpdate(condition, user);
+      const hashedPassword = await generateHashedPassword(user.password);
+      user.password = hashedPassword;
+      const data = await User.findOneAndUpdate(condition, user).select(
+        "-userId"
+      );
 
-      return res
-        .status(success)
-        .json({ message: updatedSuccessfully, data: newUser });
+      return res.status(success).json({ message: updatedSuccessfully, data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -51,8 +54,9 @@ export default class UserController {
   static deleteUser = async (req, res) => {
     try {
       const condition = { _id: req.params.id };
-      const status = await User.findOneAndDelete(condition);
-      return res.status(success).json({ message: deletedSuccessfully });
+      const data = await User.findOneAndDelete(condition);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
+      return res.status(success).json({ message: deletedSuccessfully, data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -64,10 +68,7 @@ export default class UserController {
         "-password"
       );
 
-      if (!data) {
-        return res.status(notFound).json({ message: notFoundUser });
-      }
-
+      if (!data) return res.status(notFound).json({ message: notFoundUser });
       return res.status(success).json({ data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });

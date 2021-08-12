@@ -8,6 +8,7 @@ const {
   deletedSuccessfully,
   loginSuccessfully,
   notFoundUser,
+  dataNotFound,
 } = messages;
 const { success, created, serverError, notFound } = statusCodes;
 
@@ -25,11 +26,9 @@ export default class MenuController {
   static createMenu = async (req, res) => {
     try {
       const newMenu = req.body;
-      await Menu.create(newMenu);
+      const data = await Menu.create(newMenu);
 
-      return res
-        .status(created)
-        .json({ message: "Tạo menu thành công", data: newMenu });
+      return res.status(created).json({ message: "Tạo menu thành công", data });
     } catch (error) {
       return res.status(serverError).json({ message: "Error!" });
     }
@@ -39,9 +38,10 @@ export default class MenuController {
     const condition = { _id: req.params.menuId };
     try {
       const data = await Menu.findOneAndUpdate(condition, req.body);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: updatedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 
@@ -49,9 +49,10 @@ export default class MenuController {
     const condition = { _id: req.params.menuId };
     try {
       const data = await Menu.findOneAndDelete(condition);
+      if (!data) return res.status(notFound).json({ message: dataNotFound });
       return res.status(success).json({ message: deletedSuccessfully, data });
     } catch (error) {
-      return res.status(serverError).json({ message: error || "Error!" });
+      return res.status(serverError).json({ message: "Error!" });
     }
   };
 }

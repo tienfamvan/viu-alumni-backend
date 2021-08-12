@@ -16,17 +16,17 @@ import test from "../test.js";
 
 userRoute.post(
   "/signup",
+  fileField("image"),
   validateSignUp,
   checkUseIdTaken,
-  fileField("image"),
   convertBase64,
   createUser
 );
 userRoute.put(
   "/:id",
+  fileField("image"),
   auth,
   validateSignUp,
-  fileField("image"),
   convertBase64,
   updateUser
 );

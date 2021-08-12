@@ -16,9 +16,9 @@ recruitRoutes.get("/", listRecruits);
 recruitRoutes.post(
   "/",
   auth,
-  validateRecruit,
   isAdmin,
   fileField("image"),
+  validateRecruit,
   convertBase64,
   createRecruit
 );
@@ -26,8 +26,8 @@ recruitRoutes.put(
   "/:recruitId",
   auth,
   isAdmin,
-  validateRecruit,
   fileField("image"),
+  validateRecruit,
   convertBase64,
   updateRecruit
 );

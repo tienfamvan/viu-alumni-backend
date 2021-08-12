@@ -15,8 +15,8 @@ newsRoutes.post(
   "/",
   auth,
   isAdmin,
-  validateNews,
   fileField("image"),
+  validateNews,
   convertBase64,
   createNews
 );
@@ -24,8 +24,8 @@ newsRoutes.put(
   "/:newsId",
   auth,
   isAdmin,
-  validateNews,
   fileField("image"),
+  validateNews,
   convertBase64,
   updateNews
 );
