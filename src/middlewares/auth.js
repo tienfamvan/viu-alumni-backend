@@ -14,11 +14,11 @@ const {
 const { isPasswordValid } = misc;
 
 const auth = async (req, res, next) => {
-  // const token = req.header("x-auth-token");
-  if (!req.headers["authorization"]) {
-    return res.status(forbidden).json({ message: invalidToken });
-  }
-  const token = req.headers["authorization"].split(" ")[1];
+  const token = req.header("x-auth-token");
+  // if (!req.headers["authorization"]) {
+  //   return res.status(forbidden).json({ message: invalidToken });
+  // }
+  // const token = req.headers["authorization"].split(" ")[1];
 
   // check for token
   if (!token) {
